@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4">Orders</h3>
+
+{% if orders %}
+  {% for order in orders %}
+  <div class="card mb-3 shadow">
+    <div class="card-header bg-dark text-white">
+      Order {{ order.order_no }} |
+      {{ order.contact.first_name }} {{ order.contact.last_name }}
+    </div>
+
+    <div class="card-body">
+      {% if order.items.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Size</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in order.items.all %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.size_name }}</td>
+              <td>{{ item.qty }}</td>
+              <td>₹ {{ item.unit_price }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="text-muted">No items added to this order</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <p class="text-danger">No orders found in database.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-3">Contacts</h3>
+
+<div class="row">
+{% for c in data %}
+  <div class="col-md-4">
+    <div class="card mb-3 shadow">
+      <div class="card-body">
+        <h5 class="card-title">{{ c.name }}</h5>
+        <p class="card-text">
+          <strong>Org:</strong> {{ c.organization.name }}<br>
+          <strong>Email:</strong> {{ c.email }}<br>
+          <strong>Phone:</strong> {{ c.phone }}
+        </p>
+      </div>
+    </div>
+  </div>
+{% empty %}
+<p>No contacts available</p>
+{% endfor %}
+</div>
+
+{% endblock %}
